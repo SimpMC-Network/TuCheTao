@@ -1,4 +1,4 @@
 name: autocraft
-version: '1.0-BETA'
+version: '$version'
 main: me.typical.autocraft.ACPlugin
 api-version: '1.21'

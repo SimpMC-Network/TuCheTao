@@ -1,36 +1,64 @@
 plugins {
     id 'java'
-    id("xyz.jpenilla.run-paper") version "2.3.1"
+    // Note: We apply the shadow plugin only in the modules that need it.
+    id 'com.gradleup.shadow' version '8.3.3' apply false
 }
 
 group = 'me.typical'
 version = '1.0-BETA'
 
-repositories {
-    mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
+subprojects {
+    apply plugin: 'java-library'
+
+    repositories {
+        mavenCentral()
+        maven {
+            name = "papermc-repo"
+            url = "https://repo.papermc.io/repository/maven-public/"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/groups/public/"
+        }
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io"
+        }
+        maven {
+            name = "codemc-releases"
+            url = "https://repo.codemc.io/repository/maven-releases/"
+        }
+        maven {
+            name = "codemc-snapshots"
+            url = "https://repo.codemc.io/repository/maven-snapshots/"
+        }
+        maven {
+            url = 'https://repo.extendedclip.com/releases/'
+        }
+        maven {
+            name = 'rosewood-playerpoints'
+            url = 'https://repo.rosewooddev.io/repository/public/'
+        }
+        maven {
+            name = 'mojang-ass'
+            url = 'https://libraries.minecraft.net/'
+        }
+        maven {
+            name = 'nightexpress'
+            url = 'https://repo.nightexpressdev.com/releases'
+        }
+        maven {
+            name = 'phoenix'
+            url = "https://nexus.phoenixdevt.fr/repository/maven-public/"
+        }
+        maven {
+            name = 'matteodev'
+            url = 'https://maven.devs.beer/'
+        }
     }
 }
 
-dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-}
-
-tasks {
-    runServer {
-        // Configure the Minecraft version for our task.
-        // This is the only required configuration besides applying the plugin.
-        // Your plugin's jar (or shadowJar if present) will be used automatically.
-        minecraftVersion("1.21")
-    }
-}
-
+// Set the Java version for all subprojects
 def targetJavaVersion = 21
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
@@ -43,17 +71,8 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
     }
 }
 
-processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
-        expand props
-    }
-}
