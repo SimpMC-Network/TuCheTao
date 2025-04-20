@@ -1,6 +1,6 @@
 # TuCheTao
 
-**Server Version**: Paper 1.21
+**Server Version**: Paper > 1.16
 ---
 
 ## 📌 Giới thiệu
