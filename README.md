@@ -6,7 +6,7 @@
 ## 📌 Giới thiệu
 
 TuCheTao là plugin cho phép **tự động chế tạo vật phẩm** khi người chơi có đủ nguyên liệu yêu cầu.  
-Các tính năng nổi bật:
+Các tính năng nổi bật*:*
 
 - Hỗ trợ **Permission** để giảm thời gian chờ chế tạo.
 - GUI hiển thị danh sách vật phẩm có thể chế tạo.
