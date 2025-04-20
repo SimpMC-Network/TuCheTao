@@ -1,4 +1,15 @@
-name: autocraft
+name: TuCheTao
 version: '$version'
-main: me.typical.autocraft.ACPlugin
+main: org.simpmc.autocraft.ACPlugin
 api-version: '1.21'
+escription: "AutoCraft plugin for Paper Server"
+website: "https://simpmc.net"
+author: "typical.smc"
+softdepend:
+  - MMOItems
+  - ItemsAdder
+permissions:
+  autocraft.tuchetao:
+  autocraft.admin.reload:
+    default: op
+  autocraft.viewrecipe:

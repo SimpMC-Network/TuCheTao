@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // Pull in the RCON-Java client
+        classpath 'org.glavo:rcon-java:3.0'
+    }
+}
 plugins {
     id 'java'
     // Note: We apply the shadow plugin only in the modules that need it.
@@ -6,7 +15,6 @@ plugins {
 
 group = 'me.typical'
 version = '1.0-BETA'
-
 subprojects {
     apply plugin: 'java-library'
 
@@ -73,6 +81,41 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
+    }
+}
+
+import org.glavo.rcon.Rcon
+
+tasks.register('sendRconCommand') {
+    description = 'Sends "res" command to the Minecraft server via RCON'
+    doLast {
+        def host = 'localhost'          // your server IP or hostname
+        def port = 25575                // your RCON port
+        def password = '123123123' // your RCON password
+        def command = 'res' // the command you want to send
+        // Send the command and capture the response
+        Rcon rcon = null
+        try {
+            rcon = new Rcon(host, port, password)
+            String response = rcon.command(command)
+            println "RCON Response: $response"
+
+        } catch (SocketException e) {
+            // Connection reset is expected when the server stops itself
+            println "🔌 Connection reset by server (expected if it just stopped). Ignoring."
+        } catch (Exception e) {
+            // Other RCON or IO errors
+            println "❗ Unexpected error sending RCON command: ${e.class.simpleName}: ${e.message}"
+        } finally {
+            if (rcon != null) {
+                try {
+                    rcon.close()
+                } catch (Exception ignored) {
+                }
+            }
+        }
+        println "⏱ Waiting 5 second..."
+        Thread.sleep(5000)
     }
 }
 
