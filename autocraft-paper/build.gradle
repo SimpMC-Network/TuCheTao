@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'com.gradleup.shadow'
-    id("de.eldoria.plugin-yml.bukkit") version "0.7.1"
 }
 version = getRootProject().version
 dependencies {
@@ -31,7 +30,7 @@ dependencies {
 
 shadowJar {
     // Configure name & output location
-    archiveBaseName.set("PTL-AutoCraft-Paper")
+    archiveBaseName.set("TuCheTao")
     archiveVersion.set(version)
     archiveClassifier.set('')
     destinationDirectory = file("D:\\paper1.21.4\\plugins")
@@ -44,30 +43,12 @@ shadowJar {
     relocate("com.github.retrooper.packetevents", "me.typical.lib.com.packetevents")
 
 }
-
-bukkit {
-    // Default values can be overridden if needed
-    name = "TuCheTao"
-    version = this.version
-    description = "AutoCraft plugin for Paper Server"
-    website = "https://simpmc.net"
-    author = "typical.smc"
-
-    // Plugin main class (required)
-    main = "me.typical.autocraft.ACPlugin"
-
-    // Mark plugin for supporting Folia
-    foliaSupported = true
-
-    softdepend = listOf("MMOItems", "ItemsAdder")
-
-    // API version (should be set for 1.13+)
-    apiVersion = "1.13"
-
-    permissions {
-        register("autocraft.tuchetao")
-        register("autocraft.viewrecipe")
-        register("autocraft.admin.reload")
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
     }
 }
 tasks.build {

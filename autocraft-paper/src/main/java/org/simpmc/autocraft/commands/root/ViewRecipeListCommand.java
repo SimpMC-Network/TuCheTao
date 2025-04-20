@@ -7,7 +7,7 @@ import org.simpmc.autocraft.menu.RecipesListView;
 public class ViewRecipeListCommand {
     public ViewRecipeListCommand() {
         new CommandAPICommand("xemcongthuc")
-                .withPermission("autocraft.viewrecipe")
+                .withPermission("tuchetao.xemcongthuc")
                 .executesPlayer((player, args) -> {
                     ACPlugin.getInstance().getViewFrame().open(RecipesListView.class, player);
 

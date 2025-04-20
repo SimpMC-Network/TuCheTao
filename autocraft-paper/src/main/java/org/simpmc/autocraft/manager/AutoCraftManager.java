@@ -17,6 +17,7 @@ import org.simpmc.autocraft.util.MessageUtil;
 import java.util.*;
 
 public class AutoCraftManager {
+    // Logic taken from simple-skygencore by Cortez_Romeo
     private final HashSet<String> processingPlayers = new HashSet<>();
     private final HashSet<String> enabledPlayers = new HashSet<>();
     private final RecipeRegistry recipeRegistry;
@@ -27,14 +28,17 @@ public class AutoCraftManager {
         this.recipeRegistry = plugin.getRecipeRegistry();
     }
 
-    public boolean toggleAutoCraft(Player player) {
+    public void toggleAutoCraft(Player player) {
         if (isPlayerAutoCrafting(player)) {
-            stopAutoCraft(player);
-            return false;
-        } else {
-            startAutoCraft(player);
-            return true;
+            if (stopAutoCraft(player)) {
+                player.sendMessage(MessageUtil.trans(ConfigManager.getMessageConfig().toggleAutoCraftOff));
+            }
+            return;
         }
+        startAutoCraft(player);
+        player.sendMessage(MessageUtil.trans(ConfigManager.getMessageConfig().toggleAutoCraftOn));
+
+
     }
 
     public void startAutoCraft(Player player) {
@@ -49,7 +53,7 @@ public class AutoCraftManager {
 
             plugin.getFoliaLib().getScheduler().runAtEntityLater(player, task -> {
                 double cooldown = getCooldown(player);
-                sendActionBar(player, ConfigManager.getMessageConfig().autocraftWaiting.replace("{time}", String.valueOf(cooldown)));
+                sendActionBar(player, ConfigManager.getMessageConfig().autocraftWaiting.replace("{time}", String.valueOf(cooldown / 20)));
                 processAutoCraft(player);
                 processingPlayers.remove(player.getName());
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 2);
@@ -59,12 +63,13 @@ public class AutoCraftManager {
         }
     }
 
-    public void stopAutoCraft(Player player) {
+    public boolean stopAutoCraft(Player player) {
         if (isPlayerAutoCrafting(player)) {
-            processingPlayers.remove(player.getName());
-            player.sendMessage(MessageUtil.trans(ConfigManager.getMessageConfig().toggleAutoCraftOff));
+            enabledPlayers.remove(player.getName());
+            return true;
         } else {
             player.sendMessage(MessageUtil.trans(ConfigManager.getMessageConfig().autocraftToggleWait));
+            return false;
         }
     }
 
@@ -95,8 +100,7 @@ public class AutoCraftManager {
     private void executeAutoCraft(Player player) {
         if (!isPlayerAutoCrafting(player)) return;
 
-        for (Recipe recipe : recipeRegistry.getRecipes()) {
-//            if (!player.hasPermission(recipe.permission)) continue;
+        for (Recipe recipe : recipeRegistry.getRecipesAvailable(player)) {
 
             Map<ItemStack, Integer> craftableItems = new HashMap<>();
             List<ItemStack> requiredItems = new ArrayList<>();
@@ -158,15 +162,15 @@ public class AutoCraftManager {
     }
 
     private int getCooldown(Player player) {
-        if (player.isOp()) return 10;
+        if (player.isOp()) return 10; // 0.5 seconds
 
         for (Integer delay : ConfigManager.getMainConfig().craftdelay) {
-            if (player.hasPermission("autocraft.timecraft" + delay)) {
-                return delay;
+            if (player.hasPermission("tuchetao.timecraft." + delay)) {
+                return delay * 20; // Convert seconds to ticks
             }
         }
 
-        return 300;
+        return 300; // Default to 15 seconds
     }
 
     private boolean isPlayerAutoCrafting(Player player) {

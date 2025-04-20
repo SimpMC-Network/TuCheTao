@@ -1,5 +1,6 @@
 package org.simpmc.autocraft.config.types;
 
+import de.exlll.configlib.Comment;
 import de.exlll.configlib.Configuration;
 import org.simpmc.autocraft.config.types.data.ItemType;
 import org.simpmc.autocraft.config.types.data.Recipe;
@@ -9,10 +10,11 @@ import java.util.Map;
 
 @Configuration
 public class RecipesConfig {
+    @Comment("Hỗ trợ các loại type: VANILLA, MMOITEMS (Cần thêm catergory), ITEMSADDER")
     public Map<String, Recipe> recipes = Map.of(
             "superdirt",
             Recipe.builder()
-                    .permission("autocraft.superdirt")
+                    .permission("tuchetao.superdirt")
                     .ingredients(Map.of(
                             "dirt", RecipeItem.builder()
                                     .type(ItemType.VANILLA)
@@ -31,7 +33,7 @@ public class RecipesConfig {
                     .build(),
             "superstone",
             Recipe.builder()
-                    .permission("autocraft.superstone")
+                    .permission("tuchetao.superstone")
                     .ingredients(Map.of(
                             "stone", RecipeItem.builder()
                                     .type(ItemType.VANILLA)
@@ -50,7 +52,7 @@ public class RecipesConfig {
                     .build(),
             "supersuperstone",
             Recipe.builder()
-                    .permission("autocraft.supersuperstone")
+                    .permission("tuchetao.supersuperstone")
                     .ingredients(Map.of(
                             "superstone", RecipeItem.builder()
                                     .type(ItemType.MMOITEMS)

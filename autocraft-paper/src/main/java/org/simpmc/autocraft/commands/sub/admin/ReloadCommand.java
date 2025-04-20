@@ -7,8 +7,8 @@ import org.simpmc.autocraft.util.MessageUtil;
 
 public class ReloadCommand {
     public ReloadCommand() {
-        new CommandAPICommand("autocraftreload")
-                .withPermission("autocraft.admin.reload")
+        new CommandAPICommand("tuchetaoreload")
+                .withPermission("tuchetao.admin.reload")
                 .executesPlayer((player, args) -> {
                     ACPlugin plugin = ACPlugin.getInstance();
                     plugin.getFoliaLib().getScheduler().runAsync(task -> {

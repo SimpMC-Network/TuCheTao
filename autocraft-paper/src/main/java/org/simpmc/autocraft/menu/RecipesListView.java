@@ -19,7 +19,7 @@ import java.util.Map;
 public class RecipesListView extends View {
 
     private final State<Pagination> paginationState = buildLazyPaginationState(context -> {
-        return ACPlugin.getInstance().getRecipeRegistry().getRecipes();
+        return ACPlugin.getInstance().getRecipeRegistry().getRecipesAvailable(context.getPlayer());
     }).elementFactory((ctx, bukkitItemComponentBuilder, i, recipe) -> {
         List<String> processedLore = recipe.getMenuLore();
 

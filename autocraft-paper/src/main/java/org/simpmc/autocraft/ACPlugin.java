@@ -20,6 +20,7 @@ public final class ACPlugin extends JavaPlugin {
     private static ACPlugin instance;
     @Getter
     private static ConfigManager configManager;
+    private final boolean dev = false; // change this on release
     @Getter
     private CommandHandler commandHandler;
     @Getter
@@ -28,11 +29,8 @@ public final class ACPlugin extends JavaPlugin {
     private ViewFrame viewFrame;
     @Getter
     private AutoCraftManager autoCraftManager;
-
     @Getter
     private RecipeRegistry recipeRegistry;
-
-    private final boolean dev = true; // change this on release
 
     @Override
     public void onLoad() {
@@ -46,9 +44,10 @@ public final class ACPlugin extends JavaPlugin {
         instance = this;
         foliaLib = new FoliaLib(this);
 
+        // Reset config
         if (dev) {
             try {
-                File autocraftFolder = new File(getDataFolder().getParentFile(), "autocraft");
+                File autocraftFolder = new File(getDataFolder().getParentFile(), getPluginMeta().getName());
                 if (deleteDirectory(autocraftFolder)) {
                     getLogger().info("Successfully deleted plugins/autocraft.");
                 } else {
@@ -60,6 +59,7 @@ public final class ACPlugin extends JavaPlugin {
         }
         configManager = new ConfigManager(this);
         recipeRegistry = new RecipeRegistry();
+        recipeRegistry.loadRecipes();
         autoCraftManager = new AutoCraftManager(this);
         commandHandler.onEnable();
         registerInventoryFramework();
