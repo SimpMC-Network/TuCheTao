@@ -4,6 +4,7 @@ import com.tcoded.folialib.FoliaLib;
 import lombok.Getter;
 import me.devnatan.inventoryframework.ViewFrame;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.simpmc.autocraft.bstats.Metrics;
 import org.simpmc.autocraft.commands.CommandHandler;
 import org.simpmc.autocraft.config.ConfigManager;
 import org.simpmc.autocraft.manager.AutoCraftManager;
@@ -43,6 +44,7 @@ public final class ACPlugin extends JavaPlugin {
         // Plugin startup logic
         instance = this;
         foliaLib = new FoliaLib(this);
+        new Metrics(this, 25553);
 
         // Reset config
         if (dev) {
