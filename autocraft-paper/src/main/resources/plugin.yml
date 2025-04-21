@@ -1,7 +1,7 @@
 name: TuCheTao
 version: '$version'
 main: org.simpmc.autocraft.ACPlugin
-api-version: '1.21'
+api-version: '1.16'
 description: "Plugin TuCheTao"
 website: "https://simpmc.net"
 authors:
