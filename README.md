@@ -1,76 +1,69 @@
-# TuCheTao
+TuCheTao [![Discord](https://img.shields.io/discord/1353293624238145626.svg?label=\&logo=discord\&logoColor=ffffff\&color=7389D8\&labelColor=6A7EC2)](https://discord.typicalsmc.me/discord) ![Supported server version](https://img.shields.io/badge/minecraft-1.16%2B-green)
 
-**Server Version**: Paper > 1.16
----
+Language: [Vietnamese](README_VN.md), **[English](README.md)**
 
-## 📌 Giới thiệu
+Automatic crafting plugin that instantly crafts items when players have the required ingredients.
 
-TuCheTao là plugin cho phép **tự động chế tạo vật phẩm** khi người chơi có đủ nguyên liệu yêu cầu.  
-Các tính năng nổi bật*:*
+**Supports item sources:** Minecraft, MMOItems, ItemsAdder
 
-- Hỗ trợ **Permission** để giảm thời gian chờ chế tạo.
-- GUI hiển thị danh sách vật phẩm có thể chế tạo.
-- Video demo GUI: [Xem tại đây](https://youtu.be/vqMgTj9-Oos)
+# Download
 
-**Tính năng GUI:**
+* [Download the plugin here (v1.0)](https://github.com/SimpMC-Studio/TuCheTao/releases/tag/1.0)
 
-- Nút chuyển trang.
-- Tự động hiện các công thức chế tạo hiện có trong server.
-- Khi bấm vào vật phẩm, hiển thị menu con với thông tin chi tiết.
+# Features
 
----
+* Automatically crafts items when requirements are met
+* GUI displaying all available recipes
+* Detailed info popup for each recipe
+* Permission-based cooldown reduction
+* Auto-detects and lists all server recipes
+* Color codes with `&` formatting and easy GUI customization
 
-## ⚙️ Lệnh & Quyền
+> 🎥 **Demo video:** [Watch on YouTube](https://youtu.be/vqMgTj9-Oos)
 
-### 🎮 Dành cho Member:
+# Commands & Permissions
 
-| Lệnh           | Mô tả                                                                       |
-|----------------|-----------------------------------------------------------------------------|
-| `/tuchetao`    | Bật / tắt tính năng tự động chế tạo.                                        |
-| `/xemcongthuc` | Mở GUI danh sách công thức chế tạo. (Chỉ hiện công thức có quyền tương ứng) |
+## For Players
 
-**Quyền:**
+| Command        | Description                                                      | Permission             |
+|----------------|------------------------------------------------------------------|------------------------|
+| `/tuchetao`    | Toggle automatic crafting on/off                                 | `tuchetao.use`         |
+| `/xemcongthuc` | Open the recipe GUI (only shows recipes you have permission for) | `tuchetao.xemcongthuc` |
 
-- `tuchetao.use` – sử dụng lệnh `/tuchetao`
-- `tuchetao.xemcongthuc` – sử dụng lệnh `/xemcongthuc`
+## For Admins
 
----
+| Command           | Description                 | Permission              |
+|-------------------|-----------------------------|-------------------------|
+| `/tuchetaoreload` | Reload plugin configuration | `tuchetao.admin.reload` |
 
-### 🛠️ Dành cho Admin:
+## Crafting Time Permissions
 
-| Lệnh              | Mô tả                   |
-|-------------------|-------------------------|
-| `/tuchetaoreload` | Reload cấu hình plugin. |
+| Permission                     | Description                                                           |
+|--------------------------------|-----------------------------------------------------------------------|
+| `tuchetao.timecraft.<seconds>` | Sets individual crafting cooldown. E.g. `tuchetao.timecraft.10` = 10s |
 
-**Quyền:**
+# Configuration
 
-- `tuchetao.admin.reload`
+Default config folder: `./plugins/TuCheTao`
 
----
+```
+TuCheTao
+│   config.yml
+│   messages.yml
+│
+└───recipes
+        example-recipe.yml
+```
 
-### ⏱️ Quyền chung:
+* Place your custom recipe files in `recipes/`
+* GUI settings and cooldown options in `config.yml`
+* Message texts and color codes in `messages.yml`
 
-- `tuchetao.timecraft.<giây>` – Quy định thời gian chế tạo cho từng người chơi (mặc định là `15` giây).  
-  Ví dụ: `tuchetao.timecraft.10` sẽ giảm thời gian chờ còn 10 giây.
+# Notes
 
----
+* Currently migrating all messages to MiniMessage and using the Adventure API for modern Paper compatibility.
 
-## 🔍 Chi tiết & Giải thích
+# Support
 
-- Hỗ trợ nguyên liệu là các item trong **Minecraft**, **MMOItems**, **ItemsAdder**
-- Hỗ trợ vật phẩm đầu ra là item trong **Minecraft**, **MMOItems**, **ItemsAdder**
-- Hỗ trợ tùy chỉnh GUI trong file config tương ứng.
-- Hỗ trợ định dạng màu sắc Minecraft kiểu `&`.
-
----
-
-## 📌 Ghi chú
-
-- Plugin đang trong quá trình chuyển đổi toàn bộ tin nhắn sang MiniMessage và hệ thống `Adventure` để tương thích tốt
-  hơn với các phiên bản Paper hiện đại.
-
----
-
-## 📫 Liên hệ
-
-Nếu có vấn đề hoặc cần hỗ trợ, hãy liên hệ discord `typical.smc` hoặc mở issue trên GitHub (nếu có).
+* Discord: `typical.smc`
+* Open an issue on GitHub if you encounter any bugs or need assistance.
