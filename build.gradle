@@ -12,7 +12,9 @@ plugins {
     // Note: We apply the shadow plugin only in the modules that need it.
     id 'com.gradleup.shadow' version '8.3.3' apply false
 }
-
+jar {
+    enabled = false
+}
 group = 'me.typical'
 version = '1.0'
 subprojects {

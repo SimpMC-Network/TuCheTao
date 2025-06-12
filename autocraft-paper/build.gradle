@@ -33,8 +33,11 @@ shadowJar {
     archiveBaseName.set("TuCheTao")
     archiveVersion.set(version)
     archiveClassifier.set('')
-    destinationDirectory = file("D:\\paper1.21.4\\plugins")
-
+    if (System.getenv("OUTPUT_DIR") != null) {
+        destinationDirectory.set(file(System.getenv("OUTPUT_DIR")))
+    } else {
+        destinationDirectory.set(file("$projectDir/../build/libs"))
+    }
     relocate("de.exlll.configlib", "me.typical.lib.configlib")
     relocate("dev.jorel.commandapi", "me.typical.lib.commandapi")
     relocate("com.tcoded.folialib", "me.typical.lib.folialib")
