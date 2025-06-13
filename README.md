@@ -6,6 +6,8 @@ Automatic crafting plugin that instantly crafts items when players have the requ
 
 **Supports item sources:** Minecraft, MMOItems, ItemsAdder
 
+![Bstats](https://bstats.org/signatures/bukkit/TuCheTao.svg)
+
 # Download
 
 * [Download the plugin here (v1.0)](https://github.com/SimpMC-Studio/TuCheTao/releases/tag/1.0)

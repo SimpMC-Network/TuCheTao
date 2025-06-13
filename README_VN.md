@@ -6,6 +6,8 @@ Plugin tự động chế tạo vật phẩm khi người chơi có đủ nguyê
 
 **Hỗ trợ vật phẩm của:** Minecraft, MMOItems, ItemsAdder
 
+![Bstats](https://bstats.org/signatures/bukkit/TuCheTao.svg)
+
 # Tải xuống
 
 - [Tải plugin tại đây](https://github.com/SimpMC-Studio/TuCheTao/releases/tag/1.0)
